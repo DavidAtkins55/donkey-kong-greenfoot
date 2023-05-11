@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=finish_ladder
+comment0.text=\n\ Write\ a\ description\ of\ class\ finish_ladder\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\n\ Act\ -\ do\ whatever\ the\ finish_ladder\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n\ alot\ of\ these\ classes\ may\ not\ be\ used\ in\ the\ end\ \n
+numComments=2

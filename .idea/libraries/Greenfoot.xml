@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Greenfoot">
+    <CLASSES>
+      <root url="file:///Applications/Greenfoot.app" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file:///Applications/Greenfoot.app/Contents/Resources/Java/english/greenfoot/api" />
+      <root url="file:///Applications/Greenfoot.app/Contents/Resources/Java/greenfoot/common" />
+    </SOURCES>
+  </library>
+</component>
