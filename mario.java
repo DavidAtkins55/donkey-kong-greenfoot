@@ -11,7 +11,7 @@ public class mario extends Actor
     private int jumpStrength = -11; 
     private double gravity = 0.5; 
     boolean plEnding = false;
-    ScoreBoard scoreboard = new ScoreBoard();
+    //ScoreBoard scoreboard = new ScoreBoard();
     
     public int getLives()
     {
@@ -31,7 +31,7 @@ public class mario extends Actor
     
     public void act() {
         moving();
-        scoreboard.update(this);
+        //scoreboard.update();
         if (isTouching(Ladder.class)) {
             if (Greenfoot.isKeyDown("up")) {
                 setLocation(getX(), getY() - 5);
@@ -44,13 +44,6 @@ public class mario extends Actor
                 move(-5);
             }
         }
-        if (isTouching(Barrel.class)) {
-            removeTouching(Barrel.class);
-            life--;
-            if (life == 0) {
-                Greenfoot.stop();
-            }
-        }   
         if (isTouching(peach.class)) {
             setImage("peach_end.png");
             setLocation(350, 35);

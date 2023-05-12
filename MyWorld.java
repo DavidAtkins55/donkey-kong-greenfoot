@@ -9,10 +9,9 @@ public class MyWorld extends World
     public MyWorld()
     {    
         super(600, 800, 1); 
-        mario = new mario(); // Create a new Mario object
-        //addObject(mario, 100, 290); // Add Mario to the world
-        scoreboard = new ScoreBoard(mario); // Pass Mario to the ScoreBoard constructor
-        addObject(scoreboard, 35, 10); // Add the ScoreBoard to the world
+        mario = new mario();
+	scoreboard = new ScoreBoard(); 
+	addObject(scoreboard, 35, 10); 
         level();
     }
 
