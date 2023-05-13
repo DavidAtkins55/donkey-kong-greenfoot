@@ -4,6 +4,4 @@ comment1.params=
 comment1.target=ScoreBoard()
 comment2.params=
 comment2.target=void\ update()
-comment3.params=
-comment3.target=void\ isbarrelled()
-numComments=4
+numComments=3

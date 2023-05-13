@@ -13,10 +13,7 @@ public class mario extends Actor
     boolean plEnding = false;
     //ScoreBoard scoreboard = new ScoreBoard();
     
-    public int getLives()
-    {
-        return life;
-    }
+    
     
     public boolean onPlatform() {
     if (vSpeed >= 0) { 
@@ -31,7 +28,7 @@ public class mario extends Actor
     
     public void act() {
         moving();
-        //scoreboard.update();
+        checkCollision();
         if (isTouching(Ladder.class)) {
             if (Greenfoot.isKeyDown("up")) {
                 setLocation(getX(), getY() - 5);
@@ -43,6 +40,12 @@ public class mario extends Actor
                 setLocation(getX(), getY() - 5);
                 move(-5);
             }
+        }
+        if (isTouching(Barrel.class)) {
+        World world = getWorld(); // get the current world
+        Barrel barrel = (Barrel) getOneIntersectingObject(Barrel.class); // get the barrel that is touching Mario
+        life --;
+        world.removeObject(barrel); // remove the barrel from the world
         }
         if (isTouching(peach.class)) {
             setImage("peach_end.png");
@@ -77,6 +80,7 @@ public class mario extends Actor
         if (plEnding == true){
             getWorld().addObject(youwin, 300, 350);
             Greenfoot.stop();
+            //plays the ending and stops the game.
         }
     }
     
@@ -102,5 +106,29 @@ public class mario extends Actor
         Actor below = getOneObjectAtOffset(0, getImage().getHeight()/2, platform.class);
         return below != null;
     }
+    
+     public boolean isTouchingBarrel()
+    {
+    return (getOneIntersectingObject(Barrel.class) != null);
+    }
+    
+     public void removeTouchingBarrel()
+    {
+    removeTouching(Barrel.class);
+    }
+    
+     public void checkCollision() {
+        Barrel barrel = (Barrel) getOneIntersectingObject(Barrel.class);
+        if (barrel != null) {
+            life--;
+            getWorld().removeObject(barrel);
+        }
+    }
+    
+    public int getScore() {
+        return life;
+    }
+
+    
     
 }
