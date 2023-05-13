@@ -1,27 +1,24 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
-/**
- * Write a description of class peach here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class peach extends Actor
 {
-    /**
-     * Act - do whatever the peach wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public boolean onPlatform() {
+
+    
+    public boolean istouchpeach() {
+
     Actor mario= getOneIntersectingObject(mario.class);
     return mario != null;
     }
 
     
-    public void act()
-    {
-        
+    public void act() {
+    // Check if mario is touching the peach object
+    List<mario> marios = getObjectsAtOffset(0, 0, mario.class);
+    if (!marios.isEmpty()) {
+        // Change the image of the peach object
+        setImage("toosmalltosee.png");
     }
-    
-            
+    }
 }
+

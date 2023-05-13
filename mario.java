@@ -8,6 +8,9 @@ public class mario extends Actor
     private double gravity = 0.5;
     private double vSpeed = 0; 
     boolean plEnding = false;
+    private int score = 0;
+    private ScoreBoard scoreBoard;
+    
     
     public boolean onPlatform() {
     if (vSpeed >= 0) { 
@@ -37,6 +40,7 @@ public class mario extends Actor
         }
         if (isTouching(peach.class)) {
             setImage("peach_end.png");
+            
             setLocation(350, 35);
             plEnding = true; //short for play-ending will set mario to behind the image stop the player being able to move and allow the gif or image of the ending to play.
         }
@@ -94,17 +98,17 @@ public class mario extends Actor
     public void checkCollision() {
         Barrel barrel = (Barrel) getOneIntersectingObject(Barrel.class);
         if (barrel != null) {
-            life++;
+            life--;
             getWorld().removeObject(barrel);
         }
     }
-    
     //methods that the scoreboard will call
     public boolean isTouchingBarrel()
     {
         return (getOneIntersectingObject(Barrel.class) != null);
     }
     
+        
     public void removeTouchingBarrel()
     {
         removeTouching(Barrel.class);

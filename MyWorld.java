@@ -9,13 +9,16 @@ public class MyWorld extends World
     public MyWorld()
     {    
         super(600, 800, 1); 
-        mario = new mario();
-	scoreboard = new ScoreBoard(); 
-	addObject(scoreboard, 35, 10); 
+        scoreboard = new ScoreBoard(); // Instantiate the scoreboard object first
+        mario = new mario(); // Then pass it to the mario constructor
+        addObject(scoreboard, 35, 10); 
+        act();
         level();
     }
 
-
+    public void act(){
+        scoreboard.update();
+    }
 
 
     public void level() 
@@ -39,7 +42,7 @@ public class MyWorld extends World
 
         //second platform
         addObject(new platform(), 500, 665);
-        addObject(new platform(), 430, 660);
+        addObject(new NSldPltfrm(), 430, 660);
         addObject(new platform(), 360, 655);
         addObject(new platform(), 290, 650);
         addObject(new platform(), 220, 645);
@@ -51,7 +54,7 @@ public class MyWorld extends World
 
 
         //third platforms
-        addObject(new platform(), 150, 530);
+        addObject(new NSldPltfrm(), 150, 530);
         addObject(new platform(), 220, 520);
         addObject(new platform(), 290, 510);
         addObject(new platform(), 360, 500);
@@ -63,7 +66,7 @@ public class MyWorld extends World
         
         
         //fourth platform
-        addObject(new platform(), 500, 380);
+        addObject(new NSldPltfrm(), 500, 380);
         addObject(new platform(), 430, 375);
         addObject(new platform(), 360, 370);
         addObject(new platform(), 290, 365);
@@ -74,7 +77,7 @@ public class MyWorld extends World
         addObject(new Ladder(), 160, 305);
         
         //fifth platforms
-        addObject(new platform(), 150, 250);
+        addObject(new NSldPltfrm(), 150, 250);
         addObject(new platform(), 220, 245);
         addObject(new platform(), 290, 240);
         addObject(new platform(), 360, 235);
@@ -93,7 +96,7 @@ public class MyWorld extends World
         addObject(new platform(), 320, 130);
         addObject(new platform(), 390, 135);
         addObject(new platform(), 440, 140);
-        addObject(new platform(), 510, 145);
+        addObject(new NSldPltfrm(), 510, 145);
         
         //princess peach platform
         addObject(new platform(), 330, 70);
@@ -109,6 +112,8 @@ public class MyWorld extends World
         addObject(new finish_ladder(), 300, 70);
 
         //addObject(new Barrel(), 245, 105);
+        
+        
     }
 
 }
