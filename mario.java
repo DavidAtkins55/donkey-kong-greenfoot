@@ -1,19 +1,13 @@
 import greenfoot.*;
 
-
 public class mario extends Actor
 {
-    private GreenfootImage marioRight = new GreenfootImage("mario_right.png");
-    private GreenfootImage marioLeft = new GreenfootImage("mario_left.png");
-    private GreenfootImage marioJump = new GreenfootImage("mario_jump.png");
+    private String[] img = {"mario_left.png", "mario_right.png","mario_jump.png"};
+    private int jumpStrength = -10; 
     private int life = 3; 
+    private double gravity = 0.5;
     private double vSpeed = 0; 
-    private int jumpStrength = -11; 
-    private double gravity = 0.5; 
     boolean plEnding = false;
-    //ScoreBoard scoreboard = new ScoreBoard();
-    
-    
     
     public boolean onPlatform() {
     if (vSpeed >= 0) { 
@@ -41,61 +35,51 @@ public class mario extends Actor
                 move(-5);
             }
         }
-        if (isTouching(Barrel.class)) {
-        World world = getWorld(); // get the current world
-        Barrel barrel = (Barrel) getOneIntersectingObject(Barrel.class); // get the barrel that is touching Mario
-        life --;
-        world.removeObject(barrel); // remove the barrel from the world
-        }
         if (isTouching(peach.class)) {
             setImage("peach_end.png");
             setLocation(350, 35);
             plEnding = true; //short for play-ending will set mario to behind the image stop the player being able to move and allow the gif or image of the ending to play.
         }
-        //method checks if mario is on the floor and that mario cannot jump through the platform above him 
         if (onFloor()) {
         Actor platform = getOneIntersectingObject(platform.class);
-            if (vSpeed >= 0 && platform != null) {
-                vSpeed = 0;
-                int newY = platform.getY() - (platform.getImage().getHeight() + getImage().getHeight())/2;
-                setLocation(getX(), newY);
-            }
-            } else {
-                // check for collision with platform from below
-                Actor platformBelow = getOneObjectAtOffset(0, getImage().getHeight()/2, platform.class);
-                if (vSpeed > 0 && platformBelow != null) {
-                    vSpeed = 0;
-                    int newY = platformBelow.getY() - (platformBelow.getImage().getHeight() + getImage().getHeight())/2;
-                    setLocation(getX(), newY);
-                }
-                // check for collision with platform from above
-                Actor platformAbove = getOneObjectAtOffset(0, -getImage().getHeight()/2 - 5, platform.class);
-                if (vSpeed < 0 && platformAbove != null) {
-                    vSpeed = 0;
-                    int newY = platformAbove.getY() + (platformAbove.getImage().getHeight() + getImage().getHeight())/2;
-                    setLocation(getX(), newY);
-                }
-            }
-            youwin youwin = new youwin();
+        if (vSpeed >= 0 && platform != null) {
+            vSpeed = 0; //method checks if mario is on the floor and that mario cannot jump through the platform above him 
+            int newY = platform.getY() - (platform.getImage().getHeight() + getImage().getHeight())/2;
+            setLocation(getX(), newY);
+        }
+        } else {
+        Actor platformBelow = getOneObjectAtOffset(0, getImage().getHeight()/2, platform.class);
+        if (vSpeed > 0 && platformBelow != null) { // check for collision with platform from below
+            vSpeed = 0;
+            int newY = platformBelow.getY() - (platformBelow.getImage().getHeight() + getImage().getHeight())/2;
+            setLocation(getX(), newY);
+        }
+        Actor platformAbove = getOneObjectAtOffset(0, -getImage().getHeight()/2 - 5, platform.class);
+        if (vSpeed < 0 && platformAbove != null) { // check for collision with platform from above
+            vSpeed = 0;
+            int newY = platformAbove.getY() + (platformAbove.getImage().getHeight() + getImage().getHeight())/2;
+            setLocation(getX(), newY);
+        }
+        }
+        youwin youwin = new youwin();
         if (plEnding == true){
             getWorld().addObject(youwin, 300, 350);
-            Greenfoot.stop();
-            //plays the ending and stops the game.
+            Greenfoot.stop(); //plays the ending and stops the game.
         }
     }
     
     public void moving() {
         if(Greenfoot.isKeyDown("Left")) {
             move(-5);
-            setImage(marioLeft);
+            setImage(img[0]);
         }
         if(Greenfoot.isKeyDown("Right")) {
             move(5);
-            setImage(marioRight);       
+            setImage(img[1]);       
         }
         if(Greenfoot.isKeyDown("Space") && onPlatform()){ // only jump when on a platform
             vSpeed = jumpStrength; // set the vertical speed to 10 for the first jump 
-            setImage(marioJump);              
+            setImage(img[2]);              
         }   
         vSpeed = vSpeed + gravity;// increase the vertical speed by the gravity 
         int vxSpeed = (int) vSpeed;
@@ -107,28 +91,26 @@ public class mario extends Actor
         return below != null;
     }
     
-     public boolean isTouchingBarrel()
-    {
-    return (getOneIntersectingObject(Barrel.class) != null);
-    }
-    
-     public void removeTouchingBarrel()
-    {
-    removeTouching(Barrel.class);
-    }
-    
-     public void checkCollision() {
+    public void checkCollision() {
         Barrel barrel = (Barrel) getOneIntersectingObject(Barrel.class);
         if (barrel != null) {
-            life--;
+            life++;
             getWorld().removeObject(barrel);
         }
+    }
+    
+    //methods that the scoreboard will call
+    public boolean isTouchingBarrel()
+    {
+        return (getOneIntersectingObject(Barrel.class) != null);
+    }
+    
+    public void removeTouchingBarrel()
+    {
+        removeTouching(Barrel.class);
     }
     
     public int getScore() {
         return life;
     }
-
-    
-    
 }
